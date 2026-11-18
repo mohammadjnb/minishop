@@ -79,9 +79,12 @@ products.forEach((product) => {
 
     const price = divCtn.appendChild(creatPrice);
     price.textContent = `$${product.price}`;
+    price.className = "m-8 price";
 
     const button = divCtn.appendChild(creatButton);
     button.textContent = "+ add to cart";
+    button.className = "m-8";
 
     container.appendChild(creatCards);
+    
 });

@@ -30,6 +30,10 @@ h1 span{
 #cart{
     display: flex;
 }
+#cart p{
+    text-align: center;
+    align-content: center;
+}
 #wishlist-count{
     background-color: #375c3f;
     border-radius: 100%;
@@ -50,7 +54,9 @@ h2 span{
     display: block;
 }
 .countainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
 }
 .product-cards{
     background-color: white;
@@ -58,7 +64,6 @@ h2 span{
     justify-content: space-between;
     margin: 8px;
     position: relative;
-    width: 300px;
 }
 .sticker{
     position: absolute;
