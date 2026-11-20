@@ -9,6 +9,7 @@ const products = [
     price: 50,
     upTitle: "AUDIO",
     subTitle: "Rich Sound, all-day comfort",
+    quantity: 0,
   },
   {
     id: "zkjyv",
@@ -18,6 +19,7 @@ const products = [
     price: 80,
     upTitle: "FOOT WEAR",
     subTitle: "Fresh steps, effortless style",
+    quantity: 0,
   },
   {
     id: "czcqw",
@@ -26,6 +28,7 @@ const products = [
     price: 120,
     upTitle: "ACCSESORIES",
     subTitle: "Timeless Looks For Everyday",
+    quantity: 0,
   },
   {
     id: "qobuz",
@@ -34,6 +37,7 @@ const products = [
     price: 35,
     upTitle: "LIFESTYLE",
     subTitle: "Made For Wherever You Go",
+    quantity: 0,
   },
 ];
 
@@ -53,36 +57,57 @@ function productSelctor (selctor){
 // product card in shopping cart genrator function
 
 function renderCart (productInCart){
+
+  // productInCart.innerHTML = "";
+
   cart.forEach(selected => {
-    const productInCartCard = document.createElement("div")
-    const productInCartName = document.createElement("p")
-    const productInCartCountainer = document.createElement("div")
-    const productInCartPrice = document.createElement("p")
-    const productInCartRemove = document.createElement("button")
+    if (selected.quantity === 1){
+      const productInCartCard = document.createElement("div")
+      const productInCartName = document.createElement("p")
+      const productInCartCountainer = document.createElement("div")
+      const productInCartCount = document.createElement("p")
+      const productInCartPrice = document.createElement("p")
+      const productInCartRemove = document.createElement("button")
+  
+      const card = productInCart.appendChild(productInCartCard)
+      card.className = "cart-card m-16"
+      card.id = selected.id
+  
+      const name = productInCartCard.appendChild(productInCartName)
+      name.textContent = selected.name
+      name.className = "product-cart-name"
+  
+      const countainer = productInCartCard.appendChild(productInCartCountainer)
+      countainer.className = "product-cart-countainer p-8"
 
-    const card = productInCart.appendChild(productInCartCard)
-    card.className = "cart-card m-16"
-
-    const name = productInCartCard.appendChild(productInCartName)
-    name.textContent = selected.name
-    name.className = "product-cart-name"
-
-    const countainer = productInCartCard.appendChild(productInCartCountainer)
-    countainer.className = "product-cart-countainer p-8"
-
-    const price = productInCartCountainer.appendChild(productInCartPrice)
-    price.textContent = `$${selected.price}`;
-    price.className = "product-cart-price m-8"
-
-    const remove = productInCartCountainer.appendChild(productInCartRemove)
-    remove.textContent = "remove"
-    remove.id = selected.id
-    remove.className = "remove-btn"
-
-    return productInCart;
+      const count = productInCartCountainer.appendChild(productInCartCount);
+      count.className = "product-count m-8";
+      count.id = selected.id + "1";
+      count.textContent = 1;
+  
+      const price = productInCartCountainer.appendChild(productInCartPrice)
+      price.textContent = `$${selected.price}`;
+      price.className = "product-cart-price m-8"
+  
+      const remove = productInCartCountainer.appendChild(productInCartRemove)
+      remove.textContent = "remove"
+      remove.id = selected.id
+      remove.className = "remove-btn"
+  
+      return productInCart;
+    }
+    else {
+      const count = document.getElementById(selected.id + "1");
+      count.textContent = selected.quantity;
+    }
   });
 }
 
+// total price function
+
+function totalPrice(){
+  
+}
 
 // product genrator
 
@@ -141,6 +166,7 @@ const addToCart = document.getElementsByClassName("add-to-cart");
 Array.from(addToCart).forEach(button => {
     button.addEventListener("click", () => {
         const selected = productSelctor(button.id);
+        selected.quantity ++;
         cart.push(selected);
         console.log(cart);
         
