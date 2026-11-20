@@ -1,3 +1,5 @@
+// value's
+
 const products = [
   {
     id: "brasb",
@@ -19,7 +21,6 @@ const products = [
   },
   {
     id: "czcqw",
-    sticker: "none",
     name: "Clasic Wriswatch",
     image: "./assets/watch.webp",
     price: 120,
@@ -28,7 +29,6 @@ const products = [
   },
   {
     id: "qobuz",
-    sticker: "none",
     name: "Urban Backpack",
     image: "./assets/images.webp",
     price: 35,
@@ -36,10 +36,55 @@ const products = [
     subTitle: "Made For Wherever You Go",
   },
 ];
-let SubTotalPrice = [];
-let productInCartBtn;
-let addToCartBtn;
-let cartCount = 0;
+
+const cart = []
+
+// function's
+
+// product selector function
+
+function productSelctor (selctor){
+  const selctedProduct = products.find(product => {
+    return product.id == selctor
+  });
+  return selctedProduct
+}
+
+// product card in shopping cart genrator function
+
+function renderCart (productInCart){
+  cart.forEach(selected => {
+    const productInCartCard = document.createElement("div")
+    const productInCartName = document.createElement("p")
+    const productInCartCountainer = document.createElement("div")
+    const productInCartPrice = document.createElement("p")
+    const productInCartRemove = document.createElement("button")
+
+    const card = productInCart.appendChild(productInCartCard)
+    card.className = "cart-card m-16"
+
+    const name = productInCartCard.appendChild(productInCartName)
+    name.textContent = selected.name
+    name.className = "product-cart-name"
+
+    const countainer = productInCartCard.appendChild(productInCartCountainer)
+    countainer.className = "product-cart-countainer p-8"
+
+    const price = productInCartCountainer.appendChild(productInCartPrice)
+    price.textContent = `$${selected.price}`;
+    price.className = "product-cart-price m-8"
+
+    const remove = productInCartCountainer.appendChild(productInCartRemove)
+    remove.textContent = "remove"
+    remove.id = selected.id
+    remove.className = "remove-btn"
+
+    return productInCart;
+  });
+}
+
+
+// product genrator
 
 const container = document.getElementById("product-countainer");
 
@@ -81,10 +126,36 @@ products.forEach((product) => {
     price.textContent = `$${product.price}`;
     price.className = "m-8 price";
 
-    const button = divCtn.appendChild(creatButton);
-    button.textContent = "+ add to cart";
-    button.className = "m-8";
+    const addToCartBtn = divCtn.appendChild(creatButton);
+    addToCartBtn.textContent = "+ add to cart";
+    addToCartBtn.className = "add-to-cart m-8";
+    addToCartBtn.id = product.id
 
     container.appendChild(creatCards);
-    
 });
+
+// product in cart's genrator
+
+const addToCart = document.getElementsByClassName("add-to-cart");
+
+Array.from(addToCart).forEach(button => {
+    button.addEventListener("click", () => {
+        const selected = productSelctor(button.id);
+        cart.push(selected);
+        console.log(cart);
+        
+        const productInCart = document.getElementById("product-in-cart")
+        const emptyState = document.getElementById("empty-state")
+        if ( cart.length === 0){
+          productInCart.style.display = "none"
+        }
+        else{
+          emptyState.style.display = "none"
+          productInCart.style.display = "block"
+          
+          renderCart(productInCart)
+        }
+
+      });
+});
+
