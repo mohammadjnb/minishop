@@ -57,9 +57,6 @@ function productSelctor (selctor){
 // product card in shopping cart genrator function
 
 function renderCart (productInCart){
-
-  // productInCart.innerHTML = "";
-
   cart.forEach(selected => {
     if (selected.quantity === 1){
       const productInCartCard = document.createElement("div")
@@ -105,9 +102,12 @@ function renderCart (productInCart){
 
 // total price function
 
-function totalPrice(){
-  
-}
+function totalPrice (){
+  const total = cart.reduce((sum , selcted) =>{
+    return sum = sum + (selcted.price * selcted.quantity)
+  },0);
+  return total;
+};
 
 // product genrator
 
@@ -167,9 +167,11 @@ Array.from(addToCart).forEach(button => {
     button.addEventListener("click", () => {
         const selected = productSelctor(button.id);
         selected.quantity ++;
-        cart.push(selected);
+        if (selected.quantity === 1){
+          cart.push(selected);
+        }
         console.log(cart);
-        
+
         const productInCart = document.getElementById("product-in-cart")
         const emptyState = document.getElementById("empty-state")
         if ( cart.length === 0){
@@ -181,7 +183,12 @@ Array.from(addToCart).forEach(button => {
           
           renderCart(productInCart)
         }
+        
+        // total price
 
+        const totalValue = document.getElementById("total-price")
+        totalValue.textContent = `$${totalPrice(cart)}`
       });
 });
 
+  
