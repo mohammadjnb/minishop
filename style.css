@@ -56,6 +56,7 @@ h1 span{
     color: white;
     width: 30px;
     height: 30px;
+    text-align: center;
 }
 
 /* title */
@@ -130,7 +131,6 @@ h2 span{
 #shopping-cart{
     background-color: white;
     border-radius: 20px;
-    padding: 16px;
 }
 #title >p{
     color: #375c3f;
@@ -168,6 +168,7 @@ h2 span{
 }
 
 /* shopping cart whith product in it */
+
 .cart-card{
     display: flex;
     justify-content: space-between;

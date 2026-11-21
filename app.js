@@ -145,6 +145,17 @@ function objectRemover(index) {
   }
 }
 
+// total item's in cart function
+
+function totalItems (a){
+  let sum = 0 
+  for(const b of a){
+    const x = b.quantity
+    sum += x
+  };
+  return sum
+};
+
 // product genrator
 
 const container = document.getElementById("product-countainer");
@@ -225,6 +236,11 @@ Array.from(addToCart).forEach((button) => {
 
     const totalValue = document.getElementById("total-price");
     totalValue.textContent = `$${totalPrice(cart)}`;
+
+    // total item's
+
+    const totalItem = document.getElementById("wishlist-count")
+    totalItem.textContent = totalItems(cart)
   });
 });
 
@@ -249,6 +265,9 @@ productInCart.addEventListener("click", (event) => {
   const total = document.getElementById("total-price");
   total.textContent = `$${totalPrice(cart)}`;
 
+  const totalItem = document.getElementById("wishlist-count")
+  totalItem.textContent = totalItems(cart)
+
   if (cart.length === 0) {
     productInCart.style.display = "none";
 
@@ -271,6 +290,9 @@ productInCart.addEventListener("click", (event) => {
 
     const totalValue = document.getElementById("total-price");
     totalValue.textContent = `$${totalPrice(cart)}`;
+
+    const totalItem = document.getElementById("wishlist-count")
+    totalItem.textContent = totalItems(cart)
 
     if (cart.length === 0) {
       productInCart.style.display = "none";
@@ -296,6 +318,9 @@ productInCart.addEventListener("click", (event) => {
 
       const totalValue = document.getElementById("total-price");
       totalValue.textContent = `$${totalPrice(cart)}`;
+
+      const totalItem = document.getElementById("wishlist-count")
+      totalItem.textContent = totalItems(cart)
     };
     if (miness){
       const product = productSelctor2(miness.id , cart , "3");
@@ -306,6 +331,9 @@ productInCart.addEventListener("click", (event) => {
   
         const totalValue = document.getElementById("total-price");
         totalValue.textContent = `$${totalPrice(cart)}`;
+
+        const totalItem = document.getElementById("wishlist-count")
+        totalItem.textContent = totalItems(cart)
       }
     };
   });
