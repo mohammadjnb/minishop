@@ -183,7 +183,19 @@ h2 span{
     padding: 4px 8px;
     border-radius: 5px;
 }
-
+.count-countainer{
+    display: flex;
+}
+.pluss-btn,
+.miness-btn{
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+    color: darkblue;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 1px darkblue; 
+}
 /* total price */
 
 #total-countainer{
