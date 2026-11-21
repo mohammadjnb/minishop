@@ -5,7 +5,7 @@ const products = [
     id: "brasb",
     sticker: "popular",
     name: "Wireless Headphone",
-    image: "./assets/headPhones.webp",
+    image: "./assets/headphones.webp",
     price: 50,
     upTitle: "AUDIO",
     subTitle: "Rich Sound, all-day comfort",
@@ -47,9 +47,16 @@ const cart = [];
 
 // product selector function
 
-function productSelctor(selctor) {
-  const selctedProduct = products.find((product) => {
+function productSelctor(selctor , a) {
+  const selctedProduct = a.find((product) => {
     return product.id == selctor;
+  });
+  return selctedProduct;
+}
+
+function productSelctor2(selctor , a , x) {
+  const selctedProduct = a.find((product) => {
+    return (product.id + x) == selctor;
   });
   return selctedProduct;
 }
@@ -89,18 +96,17 @@ function renderCart(productInCart) {
         productInCartCountBtnMiness,
       );
       minessBtn.className = "miness-btn";
+      minessBtn.id = selected.id + "3";
       minessBtn.textContent = "-";
 
-      const count =
-        productInCartCountCountainer.appendChild(productInCartCount);
+      const count = productInCartCountCountainer.appendChild(productInCartCount);
       count.className = "product-count m-8";
       count.id = selected.id + "1";
       count.textContent = 1;
 
-      const plussBtn = productInCartCountCountainer.appendChild(
-        productInCartCountBtnPluss,
-      );
+      const plussBtn = productInCartCountCountainer.appendChild(productInCartCountBtnPluss);
       plussBtn.className = "pluss-btn";
+      plussBtn.id = selected.id + "2";
       plussBtn.textContent = "+";
 
       const price = productInCartCountainer.appendChild(productInCartPrice);
@@ -195,7 +201,7 @@ const addToCart = document.getElementsByClassName("add-to-cart");
 
 Array.from(addToCart).forEach((button) => {
   button.addEventListener("click", () => {
-    const selected = productSelctor(button.id);
+    const selected = productSelctor(button.id , products);
 
     if (selected.quantity === 0) {
       cart.push(selected);
@@ -252,6 +258,7 @@ productInCart.addEventListener("click", (event) => {
 });
 
 // claer cart button action
+
 {
   const claerBtn = document.getElementById("clear-btn");
 
@@ -271,5 +278,35 @@ productInCart.addEventListener("click", (event) => {
       const emptyState = document.getElementById("empty-state");
       emptyState.style.display = "flex";
     }
+  });
+}
+
+// quantity button's action
+
+{
+  productInCart.addEventListener("click" , (event)=>{
+    const pluss = event.target.closest(".pluss-btn");
+    const miness = event.target.closest(".miness-btn");
+
+    if (pluss){
+      const product = productSelctor2(pluss.id , cart , "2");
+      product.quantity ++ ;
+      const count = document.getElementById(product.id + "1");
+      count.textContent = product.quantity ;
+
+      const totalValue = document.getElementById("total-price");
+      totalValue.textContent = `$${totalPrice(cart)}`;
+    };
+    if (miness){
+      const product = productSelctor2(miness.id , cart , "3");
+      if (product.quantity > 1){
+        product.quantity -- ;
+        const count = document.getElementById(product.id + "1");
+        count.textContent = product.quantity ;
+  
+        const totalValue = document.getElementById("total-price");
+        totalValue.textContent = `$${totalPrice(cart)}`;
+      }
+    };
   });
 }
