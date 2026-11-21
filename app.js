@@ -49,7 +49,7 @@ const cart = []
 
 function productSelctor (selctor){
   const selctedProduct = products.find(product => {
-    return product.id == selctor
+    return product.id == selctor;
   });
   return selctedProduct
 }
@@ -72,7 +72,7 @@ function renderCart (productInCart){
   
       const name = productInCartCard.appendChild(productInCartName)
       name.textContent = selected.name
-      name.className = "product-cart-name"
+      name.className = "product-cart-name p-8"
   
       const countainer = productInCartCard.appendChild(productInCartCountainer)
       countainer.className = "product-cart-countainer p-8"
@@ -107,6 +107,14 @@ function totalPrice (){
     return sum = sum + (selcted.price * selcted.quantity)
   },0);
   return total;
+};
+
+// object remover from array function
+
+function objectRemover (index){
+  if (index !== -1){
+    cart.splice(index , 1);
+  };
 };
 
 // product genrator
@@ -183,7 +191,7 @@ Array.from(addToCart).forEach(button => {
           
           renderCart(productInCart)
         }
-        
+
         // total price
 
         const totalValue = document.getElementById("total-price")
@@ -191,4 +199,27 @@ Array.from(addToCart).forEach(button => {
       });
 });
 
-  
+// remove button's action ------ event deligation
+
+const productInCart = document.getElementById("product-in-cart")
+
+productInCart.addEventListener("click" , (event) =>{
+  const remove = event.target.closest(".remove-btn");
+  if (!remove) return;
+
+  const index = cart.findIndex(product => product.id === remove.id)
+  objectRemover(index)
+
+  remove.closest(".cart-card").remove()
+
+  const total = document.getElementById("total-price")
+  total.textContent = `$${totalPrice(cart)}`
+
+  if( cart.length === 0){
+    productInCart.style.display = "none";
+
+    const emptyState = getElementById("empty-state")
+    emptyState.style.display = "block"
+  };
+});
+

@@ -183,3 +183,9 @@ h2 span{
     padding: 4px 8px;
     border-radius: 5px;
 }
+
+/* total price */
+
+#total-countainer{
+    display: flex;
+}
