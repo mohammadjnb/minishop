@@ -58,7 +58,7 @@ function productSelctor (selctor){
 
 function renderCart (productInCart){
   cart.forEach(selected => {
-    if (selected.quantity === 1){
+    if (selected.quantity === 0){
       const productInCartCard = document.createElement("div")
       const productInCartName = document.createElement("p")
       const productInCartCountainer = document.createElement("div")
@@ -90,7 +90,9 @@ function renderCart (productInCart){
       remove.textContent = "remove"
       remove.id = selected.id
       remove.className = "remove-btn"
-  
+
+      selected.quantity ++;
+      
       return productInCart;
     }
     else {
@@ -116,6 +118,13 @@ function objectRemover (index){
     cart.splice(index , 1);
   };
 };
+
+// display changer function ------- for shoppig cart section
+
+function displayChanger (){
+  
+}
+
 
 // product genrator
 
@@ -174,11 +183,16 @@ const addToCart = document.getElementsByClassName("add-to-cart");
 Array.from(addToCart).forEach(button => {
     button.addEventListener("click", () => {
         const selected = productSelctor(button.id);
-        selected.quantity ++;
-        if (selected.quantity === 1){
+        
+        if (selected.quantity === 0){
           cart.push(selected);
         }
+        else{
+          selected.quantity ++;
+        }
         console.log(cart);
+
+        
 
         const productInCart = document.getElementById("product-in-cart")
         const emptyState = document.getElementById("empty-state")
@@ -208,7 +222,13 @@ productInCart.addEventListener("click" , (event) =>{
   if (!remove) return;
 
   const index = cart.findIndex(product => product.id === remove.id)
+  for (const product of cart){
+    if(product.id === remove.id){
+      product.quantity = 0;
+    }
+  }
   objectRemover(index)
+
 
   remove.closest(".cart-card").remove()
 
@@ -218,8 +238,30 @@ productInCart.addEventListener("click" , (event) =>{
   if( cart.length === 0){
     productInCart.style.display = "none";
 
-    const emptyState = getElementById("empty-state")
-    emptyState.style.display = "block"
+    const emptyState = document.getElementById("empty-state")
+    emptyState.style.display = "flex"
   };
 });
+
+// claer cart button action
+{
+  const claerBtn = document.getElementById("clear-btn");
+  
+  claerBtn.addEventListener("click" ,() => {
+    cart.length = 0;
+    productInCart.innerHTML = "";
+
+    const totalValue = document.getElementById("total-price")
+    totalValue.textContent = `$${totalPrice(cart)}`
+
+    if (cart.length === 0){
+    productInCart.style.display = "none";
+
+    const emptyState = document.getElementById("empty-state")
+    emptyState.style.display = "flex"
+    }
+  });
+}
+
+
 
