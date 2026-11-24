@@ -39,20 +39,6 @@ main{
 .dis-flex-countainer{
     width: 100%;
 }
-
-/* header */
-
-/* header,
-main,
-footer{
-    padding-left: 10%;
-    padding-right: 10%;
-} */
-/* header{
-    display: flex;
-    justify-content: space-between;
-
-} */
 h1 span{
     color: #80946f;
 }
@@ -281,5 +267,11 @@ h2 span{
     /* responsive product cart section */
     #shopping-cart{
         width: 95%;
+    }
+    .cart-card{
+        flex-direction: column;
+    }
+    .product-cart-countainer{
+        justify-content: space-between;
     }
 }
