@@ -26,20 +26,33 @@
 main{
     background-color: #fbf8f7;
 }
+.dis-flex-content-middel{
+    display: flex;
+    justify-content: center;
+}
+.dis-flex-content-space-between{
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    width: 960px;
+}
+.dis-flex-countainer{
+    width: 100%;
+}
 
 /* header */
 
-header,
+/* header,
 main,
 footer{
     padding-left: 10%;
     padding-right: 10%;
-}
-header{
+} */
+/* header{
     display: flex;
     justify-content: space-between;
 
-}
+} */
 h1 span{
     color: #80946f;
 }
@@ -75,13 +88,12 @@ h2 span{
 
 .countainer{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 8px;
+    grid-template-columns:repeat( 4 , 240px);
+    gap: 10px;
 }
 .product-cards{
     background-color: white;
     border-radius: 20px;
-    justify-content: space-between;
     margin: 8px;
     position: relative;
 }
@@ -131,6 +143,9 @@ h2 span{
 #shopping-cart{
     background-color: white;
     border-radius: 20px;
+    width: 960px;
+    justify-self: center;
+    margin-bottom: 30px;
 }
 #title >p{
     color: #375c3f;
@@ -178,9 +193,9 @@ h2 span{
     display: flex;
 }
 .remove-btn{
-    background-color: palevioletred;
-    color: red;
-    border: solid 1px red;
+    background-color: pink;
+    color: darkred;
+    border: solid 1px darkred;
     padding: 4px 8px;
     border-radius: 5px;
 }
@@ -197,8 +212,74 @@ h2 span{
     border-radius: 5px;
     border: solid 1px darkblue; 
 }
+
 /* total price */
 
 #total-countainer{
     display: flex;
+}
+
+/* reponsive css */
+
+@media (max-width: 1024px) {
+    /* resonsive header */
+    .dis-flex-content-space-between{
+        width: 90%;
+    }
+
+    /* responsive product section*/
+    .countainer{
+        grid-template-columns:repeat( 2, 240px);
+        gap: 10px;
+    }
+
+    /* responsive product cart section */
+    #shopping-cart{
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* defult css */
+    .m-8{
+        margin: 4px;
+    }
+    .p-8{
+        padding: 4px;
+    }
+    .m-16{
+        margin: 8px;
+    }
+    .p-16{
+        padding: 8px;
+    }
+    /* resonsive header */
+    .dis-flex-content-space-between{
+        width: 95%;
+    }
+
+    /* responsive product section*/
+    .countainer{
+        grid-template-columns:repeat( 2, 150px);
+        gap: 5px;
+    }
+    .product-cards{
+        height: 310px;
+    }
+    .product-cards img{
+        height: 150px;
+    }
+    .product-cards div{
+        display: flex;
+        flex-direction: column;
+    }
+    .add-to-cart{
+        padding: 4px;
+        border-radius: 5px;
+    }
+
+    /* responsive product cart section */
+    #shopping-cart{
+        width: 95%;
+    }
 }

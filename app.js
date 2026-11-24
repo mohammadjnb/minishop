@@ -42,6 +42,7 @@ const products = [
 ];
 
 const cart = [];
+const productInCart = document.getElementById("product-in-cart");
 
 // function's
 
@@ -148,105 +149,102 @@ function objectRemover(index) {
 // total item's in cart function
 
 function totalItems (a){
-  let sum = 0 
-  for(const b of a){
-    const x = b.quantity
-    sum += x
-  };
-  return sum
+  return a.length;
 };
 
 // product genrator
 
-const container = document.getElementById("product-countainer");
-
-products.forEach((product) => {
-  const creatCards = document.createElement("div");
-  const creatStciker = document.createElement("p");
-  const creatImg = document.createElement("img");
-  const creatUpperPragraph = document.createElement("p");
-  const creatPragraph = document.createElement("p");
-  const creatLowerPragraph = document.createElement("p");
-  const creatDivCtn = document.createElement("div");
-  const creatPrice = document.createElement("p");
-  const creatButton = document.createElement("button");
-
-  creatCards.className = "product-cards";
-
-  const sticker = creatCards.appendChild(creatStciker);
-  sticker.textContent = product.sticker;
-  sticker.className = "sticker";
-
-  const img = creatCards.appendChild(creatImg);
-  img.src = product.image;
-
-  const upperPragraph = creatCards.appendChild(creatUpperPragraph);
-  upperPragraph.textContent = product.upTitle;
-  upperPragraph.className = "upper-pragraph m-8";
-
-  const paragraph = creatCards.appendChild(creatPragraph);
-  paragraph.textContent = product.name;
-  paragraph.className = "pragraph m-8";
-
-  const lowerPragraph = creatCards.appendChild(creatLowerPragraph);
-  lowerPragraph.textContent = product.subTitle;
-  lowerPragraph.className = "lower-pragraph m-8";
-
-  const divCtn = creatCards.appendChild(creatDivCtn);
-
-  const price = divCtn.appendChild(creatPrice);
-  price.textContent = `$${product.price}`;
-  price.className = "m-8 price";
-
-  const addToCartBtn = divCtn.appendChild(creatButton);
-  addToCartBtn.textContent = "+ add to cart";
-  addToCartBtn.className = "add-to-cart m-8";
-  addToCartBtn.id = product.id;
-
-  container.appendChild(creatCards);
-});
+{
+  const container = document.getElementById("product-countainer");
+  
+  products.forEach((product) => {
+    const creatCards = document.createElement("div");
+    const creatStciker = document.createElement("p");
+    const creatImg = document.createElement("img");
+    const creatUpperPragraph = document.createElement("p");
+    const creatPragraph = document.createElement("p");
+    const creatLowerPragraph = document.createElement("p");
+    const creatDivCtn = document.createElement("div");
+    const creatPrice = document.createElement("p");
+    const creatButton = document.createElement("button");
+  
+    creatCards.className = "product-cards";
+  
+    const sticker = creatCards.appendChild(creatStciker);
+    sticker.textContent = product.sticker;
+    sticker.className = "sticker";
+  
+    const img = creatCards.appendChild(creatImg);
+    img.src = product.image;
+  
+    const upperPragraph = creatCards.appendChild(creatUpperPragraph);
+    upperPragraph.textContent = product.upTitle;
+    upperPragraph.className = "upper-pragraph m-8";
+  
+    const paragraph = creatCards.appendChild(creatPragraph);
+    paragraph.textContent = product.name;
+    paragraph.className = "pragraph m-8";
+  
+    const lowerPragraph = creatCards.appendChild(creatLowerPragraph);
+    lowerPragraph.textContent = product.subTitle;
+    lowerPragraph.className = "lower-pragraph m-8";
+  
+    const divCtn = creatCards.appendChild(creatDivCtn);
+  
+    const price = divCtn.appendChild(creatPrice);
+    price.textContent = `$${product.price}`;
+    price.className = "m-8 price";
+  
+    const addToCartBtn = divCtn.appendChild(creatButton);
+    addToCartBtn.textContent = "+ add to cart";
+    addToCartBtn.className = "add-to-cart m-8";
+    addToCartBtn.id = product.id;
+  
+    container.appendChild(creatCards);
+  });
+}
 
 // product in cart's genrator
 
-const addToCart = document.getElementsByClassName("add-to-cart");
-
-Array.from(addToCart).forEach((button) => {
-  button.addEventListener("click", () => {
-    const selected = productSelctor(button.id , products);
-
-    if (selected.quantity === 0) {
-      cart.push(selected);
-    } else {
-      selected.quantity++;
-    }
-    console.log(cart);
-
-    const productInCart = document.getElementById("product-in-cart");
-    const emptyState = document.getElementById("empty-state");
-    if (cart.length === 0) {
-      productInCart.style.display = "none";
-    } else {
-      emptyState.style.display = "none";
-      productInCart.style.display = "block";
-
-      renderCart(productInCart);
-    }
-
-    // total price
-
-    const totalValue = document.getElementById("total-price");
-    totalValue.textContent = `$${totalPrice(cart)}`;
-
-    // total item's
-
-    const totalItem = document.getElementById("wishlist-count")
-    totalItem.textContent = totalItems(cart)
+{
+  const addToCart = document.getElementsByClassName("add-to-cart");
+  
+  Array.from(addToCart).forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = productSelctor(button.id , products);
+  
+      if (selected.quantity === 0) {
+        cart.push(selected);
+      } else {
+        selected.quantity++;
+      }
+      console.log(cart);
+  
+      const productInCart = document.getElementById("product-in-cart");
+      const emptyState = document.getElementById("empty-state");
+      if (cart.length === 0) {
+        productInCart.style.display = "none";
+      } else {
+        emptyState.style.display = "none";
+        productInCart.style.display = "block";
+  
+        renderCart(productInCart);
+      }
+  
+      // total price
+  
+      const totalValue = document.getElementById("total-price");
+      totalValue.textContent = `$${totalPrice(cart)}`;
+  
+      // total item's
+  
+      const totalItem = document.getElementById("wishlist-count")
+      totalItem.textContent = totalItems(cart)
+    });
   });
-});
+}
 
 // remove button's action ------ event deligation
-
-const productInCart = document.getElementById("product-in-cart");
 
 productInCart.addEventListener("click", (event) => {
   const remove = event.target.closest(".remove-btn");
