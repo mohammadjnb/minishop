@@ -247,10 +247,13 @@ h2 span{
     /* responsive product section*/
     .countainer{
         grid-template-columns:repeat( 2, 150px);
-        gap: 5px;
+        gap: 3px;
     }
     .product-cards{
         height: 310px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     .product-cards img{
         height: 150px;
